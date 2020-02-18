@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import coordinate.domain.Point;
+import coordinate.exception.InvalidFigureException;
 
 public enum FigureFactory {
 	LINE(2, Line::new),
@@ -19,12 +20,12 @@ public enum FigureFactory {
 		this.creator = creator;
 	}
 
-	public static Figure getFigure(List<Point> points) {
+	public static Figure getFigure(List<Point> points) throws InvalidFigureException {
 		int size = points.size();
 		return Arrays.stream(values())
 				.filter(figure -> figure.matchSize(size))
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("유효하지 않은 도형입니다."))
+				.orElseThrow(InvalidFigureException::new)
 				.create(points);
 	}
 
