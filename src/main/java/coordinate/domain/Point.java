@@ -2,6 +2,8 @@ package coordinate.domain;
 
 import java.util.Objects;
 
+import coordinate.exception.InvalidPositionException;
+
 public class Point {
     private final int x;
     private final int y;
@@ -9,12 +11,12 @@ public class Point {
     private Point(int x, int y) {
         this.x = x;
         if (x < 0 || x > 24) {
-            throw new IllegalArgumentException();
+            throw new InvalidPositionException();
         }
 
         this.y = y;
         if (y < 0 || y > 24) {
-            throw new IllegalArgumentException();
+            throw new InvalidPositionException();
         }
     }
 
